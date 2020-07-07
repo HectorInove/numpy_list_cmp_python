@@ -16,6 +16,7 @@ __email__ = "alumnos@inove.com.ar"
 __version__ = "1.1"
 
 import numpy as np
+import math
 
 
 def ej1():
@@ -47,15 +48,18 @@ def ej3():
     # de someter cada valor de "X" a la función math.sin
 
     # y_list =
+    y_list = [math.sin(x) for x in x]
 
     # Conjunto de valores "X" en un arrany
     x = np.arange(0,2*np.pi,0.1)
-
     # Utilizar compresión de listas para obtener la lista    
     # "y_list" que tenga todos los valores obtenidos como resultado
     # de someter cada valor de "X" a la función np.sin
     
     # y_nump =
+    y_nump = np.sin(x)
+
+    print("Acercamiento a el uso de datos relacionales")
 
 
 def ej4():
@@ -63,7 +67,6 @@ def ej4():
     # Transformar variable numéricas en categoricas
     # Se dispone del siguiente diccionario que traduce el número ID
     # de un producto en su nombre, por ejemplo:
-    # NOTA: Esta información bien podría ser una tabla SQL: id | producto
     producto = {
                 556070: 'Auto',
                 704060: 'Moto',
@@ -72,6 +75,7 @@ def ej4():
                 905045: 'Computadora',
                 }
 
+    # NOTA: Esta información bien podría ser una tabla SQL: id | producto
     lista_compra_id = [556070, 905045, 42135, 5674, 704060, 1264, 42135, 3654]
 
     # Crear una nueva lista "lista_compra_productos" que transforme la lista
@@ -84,6 +88,12 @@ def ej4():
     # PERO recomendamos leer atentamente el método "get" de diccionarios
     # que tiene un parametro configurable respecto a que sucede
     # sino encuentra la "key" en el diccionario.
+    lista_compra_productos = [producto if  producto else "NaN" for x in lista_compra_id]
+    print(lista_compra_productos)
+
+
+
+    
 
 
 def ej5():
@@ -98,5 +108,5 @@ if __name__ == '__main__':
     #ej1()
     #ej2()
     #ej3()
-    #ej4()
+    ej4()
     #ej5()
