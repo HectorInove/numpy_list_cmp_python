@@ -204,7 +204,7 @@ def ej5():
     # InoveTip: Me encató este uso de comprension de listas ^_^
     # dudo mucho que alguien lo haga tan bien (me incluyo)
     players = [blackjack_module() for x in range(n_jugadores)]
-
+    players.sort(reverse=True, key=lambda x: x['puntaje'])
     # InoveTip: Esta bien generaras otra lista de solo puntajes
     # para odernarla y hacer el ranking, si querias entre otras cosas
     # podias indicarle al "sort" que ordene de mayor a menor (reverse)
@@ -218,6 +218,7 @@ def ej5():
 
     # sort más allá de recibir parámetros como el de "reverse" podes pasarle
     # una lambda expression o una funcion que le diga como ordenar esa lista.
+
     # En este caso vos tenes una lista de diccionarios, hay una forma fácil de
     # crear una función o lambda y pasarla como paráemtro que haga algo
     # como lo necesitas. Te dejo un ejemplo que encontré al toque:
@@ -226,35 +227,44 @@ def ej5():
     # se usa mucho esto de "sobrecargar" el método de sort para ordenar
     # cosas "especiales", se usa mucho en clases.
 
+    [print ('*' ,end='') for x in range(45)]
+    print('')
+    print('Ranking!! :D')
+    [print ('*' ,end='') for x in range(45)]
+    print('')
+    [print('jugador >', x.get('jugador'),'puntaje:', x.get('puntaje'))
+     for x in players]
+    [print ('*' ,end='') for x in range(45)]
+    print('')
+
     ranking = [x.get('puntaje') for x in players]
-    ranking.sort()
-    print(ranking)
+    
     if n_jugadores > 1:
-        if ranking[-2] == ranking[-1]:
+        if ranking[1] == ranking[0]:
             print('Empate!')
         elif sum(ranking) == 0:
             print('Perdedores!')
         else:
             winner = [x.get("jugador")
-                      for x in players if x.get('puntaje') == ranking[-1]]
+                      for x in players if x.get('puntaje') == ranking[0]]
             print('Ganó', winner[0], '!!')
     elif n_jugadores == 0:
         print('Volvé otro día entonces...')
     else:
         if ranking[0] > 0:
            player = [x.get("jugador")
-                     for x in players if x.get('puntaje') == ranking[-1]]
+                     for x in players if x.get('puntaje') == ranking[0]]
            print('Ganaste', player[0], '!!')
         else:
            player = [x.get("jugador")
-                     for x in players if x.get('puntaje') == ranking[-1]]
+                     for x in players if x.get('puntaje') == ranking[0]]
            print('Perdiste', player[0], '!!')
 
 
 if __name__ == '__main__':
     print("Ejercicios de práctica")
-    ej1()
-    ej2()
-    ej3()
-    ej4()
+    #ej1()
+    #ej2()
+    #ej3()
+    #ej4()
     ej5()
