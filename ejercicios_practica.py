@@ -15,6 +15,32 @@ __email__ = "alumnos@inove.com.ar"
 __version__ = "1.1"
 
 import numpy as np
+import random
+import math
+
+
+def blackjack_module():
+
+    print("Ingrese su nombre!")
+    nombre = str(input())
+    numeros = [random.randint(1, 10) for x in range(2)]
+    while sum(numeros) < 21:
+        print("Tus cartas:", numeros, " suman:",
+              sum(numeros), " Querés mas? Y/n?\n")
+        choice = str(input())
+        if choice == 'Y':
+            numeros.append(random.randint(1, 10))
+        elif choice == 'n':
+            break
+        else:
+            print("ponele voluntad,", nombre, " es Y o n")
+    print("Tus cartas:", numeros, " suman:", sum(numeros), "\n")
+    if sum(numeros) > 21:
+        print("Patinaste como chorizo en fuente de loza")
+        resultado = {'puntaje': 0, 'jugador': nombre}
+        return resultado
+    resultado = {'puntaje': sum(numeros), 'jugador': nombre}
+    return resultado
 
 
 def ej1():
@@ -38,6 +64,11 @@ def ej1():
         condicion "a"
     Realizar este proceso iterativo hasta cumplir el objetivo
     '''
+    while True:
+        numeros = [random.randint(1, 10) for x in range(3)]
+        if sum(numeros) <= 21:
+            print(sum(numeros))
+            break
 
 
 def ej2():
@@ -58,6 +89,9 @@ def ej2():
                'Alejandro', 'Leonel', 'Antonio', 'Omar', 'Antonia', 'Amalia',
                'Daniela', 'Sofia', 'Celeste', 'Ramon', 'Jorgelina', 'Anabela']
 
+    nombres_filtrados = [x for x in nombres if x[0] in padron]
+    print(nombres_filtrados)
+
     # Se espera obtener:
     # ['Tamara', 'Juan', 'Alberto'......]
 
@@ -77,7 +111,8 @@ def ej3():
     # NO utilizar comprensión de listas, solo utilice la
     # funcion de numpy "np.sin"
 
-    # y_nump =
+    y_nump = np.sin(x)
+    print(y_nump)
 
     # Conjunto de valores "X" en una lista
     x = list(np.arange(0, 2*np.pi, 0.1))
@@ -87,7 +122,8 @@ def ej3():
     # de someter cada valor de "X" a la función math.sin
 
     # y_list =
-
+    y_list = [math.sin(x) for x in x]
+    print(y_list)
     # Este es un ejemplo práctico de cuando es útil usar numpy,
     # basicamente siempre que deseen utilizar una función matemática
     # que esté definida en numpy NO necesitaran un bucle o comprensión
@@ -101,14 +137,18 @@ def ej4():
     # de un producto en su nombre, por ejemplo:
     # NOTA: Esta información bien podría ser una tabla SQL: id | producto
     producto = {
-                556070: 'Auto',
-                704060: 'Moto',
-                42135: 'Celular',
-                1264: 'Bicicleta',
-                905045: 'Computadora',
-                }
+        556070: 'Auto',
+        704060: 'Moto',
+        42135: 'Celular',
+        1264: 'Bicicleta',
+        905045: 'Computadora',
+    }
 
     lista_compra_id = [556070, 905045, 42135, 5674, 704060, 1264, 42135, 3654]
+
+    lista_compra_productos = [producto.get(
+        x) if x in producto else "NaN" for x in lista_compra_id]
+    print(lista_compra_productos)
 
     # Crear una nueva lista "lista_compra_productos" que transforme la lista
     # de realizada por "ID" de producto en lista por "nombre" producto
@@ -143,11 +183,39 @@ def ej5():
     más cercanos a 21 sin pasarse!
     '''
 
+    print('Ingrese acontinuación la cantidad de jugadores...')
+    n_jugadores = int(input())
+    players = [blackjack_module() for x in range(n_jugadores)]
+
+    ranking = [x.get('puntaje') for x in players]
+    ranking.sort()
+    print(ranking)
+    if n_jugadores > 1:
+        if ranking[-2] == ranking[-1]:
+            print('Empate!')
+        elif sum(ranking) == 0:
+            print('Perdedores!')
+        else:
+            winner = [x.get("jugador")
+                      for x in players if x.get('puntaje') == ranking[-1]]
+            print('Ganó', winner[0], '!!')
+    elif n_jugadores == 0:
+        print('Volvé otro día entonces...')
+    else:
+        if ranking[0] > 0:
+           player = [x.get("jugador")
+                     for x in players if x.get('puntaje') == ranking[-1]]
+           print('Ganaste', player[0], '!!')
+        else:
+           player = [x.get("jugador")
+                     for x in players if x.get('puntaje') == ranking[-1]]
+           print('Perdiste', player[0], '!!')
+
 
 if __name__ == '__main__':
     print("Ejercicios de práctica")
-    # ej1()
-    # ej2()
-    # ej3()
-    # ej4()
-    # ej5()
+    ej1()
+    ej2()
+    ej3()
+    ej4()
+    ej5()
