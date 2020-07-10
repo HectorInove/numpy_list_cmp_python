@@ -149,6 +149,22 @@ def ej4():
     lista_compra_productos = [producto.get(
         x) if x in producto else "NaN" for x in lista_compra_id]
     print(lista_compra_productos)
+    
+    # InoveTip: Se puede aprovechar el método "get" para que devuelva
+    # un resultado deseado en caso de no encontrar la key, como por ejemplo:
+    # lista_compra_productos = [producto.get(x, "Nan") for x in lista_compra_id]
+    
+    # InoveTip: Respecto al salte de linea, siempre el sistema espera que la siguiente
+    # linea este a la "altura" del corchete que fue lo que inicio el comando:
+    # lista_compra_productos = [producto.get(
+    #                           x) if x in producto else "NaN" for x in lista_compra_id]
+    
+    # Yo en todo caso lo haría así (o un salto de línea menos)
+    # lista_compra_productos = [producto.get(x)
+    #                           if x in producto else "NaN"
+    #                           for x in lista_compra_id
+    #                           ]
+    
 
     # Crear una nueva lista "lista_compra_productos" que transforme la lista
     # de realizada por "ID" de producto en lista por "nombre" producto
@@ -185,7 +201,30 @@ def ej5():
 
     print('Ingrese acontinuación la cantidad de jugadores...')
     n_jugadores = int(input())
+    # InoveTip: Me encató este uso de comprension de listas ^_^
+    # dudo mucho que alguien lo haga tan bien (me incluyo)
     players = [blackjack_module() for x in range(n_jugadores)]
+
+    # InoveTip: Esta bien generaras otra lista de solo puntajes
+    # para odernarla y hacer el ranking, si querias entre otras cosas
+    # podias indicarle al "sort" que ordene de mayor a menor (reverse)
+    # para así tenes ordenado más acorde a un raking.
+    # Lo estuve pensando un poco y no se me ocurre como hacerlo más limpio
+    # con las herramientas que tenemos, me refiero a evitar hacer la lista de
+    # ranking por separado y luego la lista de winner por separado.
+    # Lo ideal sería que pudieras ordenar la lisya players, entonces tenes
+    # el nombre y puntaje ordenado. Eso se puede hacer, es un poco más complejo
+    # pero te tiro el nombre del "tópico" por si queres investigarlo:
+
+    # sort más allá de recibir parámetros como el de "reverse" podes pasarle
+    # una lambda expression o una funcion que le diga como ordenar esa lista.
+    # En este caso vos tenes una lista de diccionarios, hay una forma fácil de
+    # crear una función o lambda y pasarla como paráemtro que haga algo
+    # como lo necesitas. Te dejo un ejemplo que encontré al toque:
+    # https://www.geeksforgeeks.org/ways-sort-list-dictionaries-values-python-using-lambda-function/
+    # Preguntame cualquier cosa sino entendes el mecanismo o la onda,
+    # se usa mucho esto de "sobrecargar" el método de sort para ordenar
+    # cosas "especiales", se usa mucho en clases.
 
     ranking = [x.get('puntaje') for x in players]
     ranking.sort()
