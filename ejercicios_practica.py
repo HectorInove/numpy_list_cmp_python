@@ -6,7 +6,7 @@ Ejercicios de práctica
 Autor: Inove Coding School
 Version: 1.1
 Descripcion:
-Programa creado para que practiquen los conocimietos
+Programa creado para que practiquen los conocimietos  a
 adquiridos durante la semana
 '''
 
